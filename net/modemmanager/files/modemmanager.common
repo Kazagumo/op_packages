@@ -165,7 +165,7 @@ mm_wait_for_modem() {
 	local sysfspath="$2"
 
 	# TODO: config max wait
-	local n=45
+	local n=30
 	local step=5
 
 	while [ $n -ge 0 ]; do
@@ -192,6 +192,7 @@ mm_wait_for_modem() {
 
 	mm_log "error" "timed out waiting for the modem to get exported at ${sysfspath}"
 	proto_set_available "${cfg}" 0
+	/etc/init.d/modemmanager restart
 	return 2
 }
 
